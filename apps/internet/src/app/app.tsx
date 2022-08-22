@@ -1,26 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { Message } from '@internet-speed/api-interfaces';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Dashboard from './pages/dashboard/dashboard';
+import Settings from './pages/settings/settings';
 
-export const App = () => {
-  const [m, setMessage] = useState<Message>({ message: '' });
-
-  useEffect(() => {
-    fetch('/api')
-      .then((r) => r.json())
-      .then(setMessage);
-  }, []);
-
+export const App: React.FC = () => {
   return (
     <>
-      <div style={{ textAlign: 'center' }}>
-        <h1>Welcome to internet!</h1>
-        <img
-          width="450"
-          src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png"
-          alt="Nx - Smart, Fast and Extensible Build System"
-        />
-      </div>
-      <div>{m.message}</div>
+      <Routes>
+        <Route path="/" element={<Dashboard/>}>
+          <Route path="settings" element={<Settings />} />
+        </Route>
+      </Routes>
     </>
   );
 };
